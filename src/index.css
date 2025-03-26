@@ -1,0 +1,344 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: block;
+  
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+/* menu bar*/
+
+.menu-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-dropdown {
+  background: white;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.menu-dropdown li {
+  padding: 10px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.menu-dropdown li a {
+  text-decoration: none;
+  color:black;
+}
+
+/* Barre de navigation */
+.navbar {
+  max-width: 100%; /* Réduit la largeur max */
+  width: 100%; /* Ajustement pour s'adapter aux écrans */
+  margin: 0 auto; /* Centre la navbar */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #362e2e;
+  padding: 10px;
+  color: white;
+  border-radius: 8px; /* Ajoute un effet arrondi */
+}
+
+
+.menu-icon {
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.navbar-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  margin-right: 25px;
+  
+}
+
+.navbar-text h1 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.navbar-text span {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* Container principal de l'accueil */
+.accueil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #fffefe 0%, #fbfbfb 100%);
+  color: #272626;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Titre principal */
+.accueil h1 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* Paragraphe sous le titre */
+.accueil p {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+/* Conteneur du champ de saisie */
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  padding: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 500px;
+  color: #272626;
+}
+
+/* Champ de saisie */
+.input-container input {
+  background-color: transparent;
+  border: 1px solid #61504d;
+  color: #171717;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+  width: 80%;
+  margin-right: 10px;
+  transition: 0.3s;
+}
+
+.input-container input:focus {
+  border-color: whitesmoke;
+  outline: none;
+  box-shadow: 0 0 10px rgba(64, 35, 21, 0.5);
+}
+
+/* Bouton d'envoi */
+.input-container button {
+  background-color: #61504d;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.input-container button:hover {
+  background-color: #6a11cb;
+  transform: scale(1.1);
+}
+
+.input-container .icon {
+  color: #eae9e9;
+  font-size: 1.7rem;
+}
+.logout-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.logout-btn:hover {
+  background: darkred;
+}
+/*--------------------------------------------------------------------------------------------------*/
+
+/* style pour la page a propos*/
+.propos{
+  background-image: url('/src/img/upjv.jpg'); /* Remplace par le bon chemin */
+  background-size: cover; /* Couvre toute la page */
+  background-position: center; /* Centre l’image */
+  background-repeat: no-repeat; /* Empêche la répétition */
+  background-attachment: fixed; /* Fixe l’image pour qu’elle ne bouge pas au scroll */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.about {
+  background: linear-gradient(135deg, rgba(160, 123, 100, 0.7), rgba(172, 130, 114, 0.7));
+
+ /* Dégradé de fond */
+  padding: 50px 20px;
+  border-radius: 20px;
+  max-width: 900px;
+  margin: 20px auto;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  color: rgb(10, 7, 7);
+  text-align: center;
+  animation: fadeIn 1.5s ease-out;
+
+  
+}
+
+.Paragraphe h2 {
+  font-family: cursive;
+  font-size: 2.8rem;
+  font-weight: 1500;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  animation: slideInFromLeft 1s ease-out;
+  right: 0;
+  left: 0;
+}
+
+.Paragraphe p {
+  font-family: cursive;
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: rgba(26, 25, 25, 0.9);
+  margin-bottom: 40px;
+  animation: fadeInUp 1.5s ease-out;
+  
+  
+}
+
+
+
+/* Conteneur du logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+/* Logo Style (Carré) */
+.logo {
+  
+  position: static;
+}
+/* Effet au survol du logo */
+.logo:hover {
+  transform: matrix3d(11.1rem);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .apropos {
+    padding: 30px 15px;
+  }
+
+  .apropos h2 {
+    font-size: 2rem;
+  }
+
+  .apropos p {
+    font-size: 1.1rem;
+  }
+
+  .logo {
+    max-width: 180px;
+  }
+}
+/* Conteneur principal des réseaux sociaux */
+/* Conteneur principal */
+.Socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* Style des icônes */
+.Socials a {
+  font-size: 30px;
+  color: white;
+  background-color: #333;
+  padding: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  width: 50px;
+  height: 50px;
+  text-decoration: none;
+}
+
+/* Couleurs spécifiques pour chaque réseau social */
+.Socials a:nth-child(1) { background-color: #0077B5; } /* LinkedIn */
+.Socials a:nth-child(2) { background-color: #1877F2; } /* Facebook */
+.Socials a:nth-child(3) { background-color: #E4405F; } /* Instagram */
+
+/* Effet au survol */
+.Socials a:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
