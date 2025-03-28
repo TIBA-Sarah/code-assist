@@ -1,37 +1,32 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-// Création du schéma de l'utilisateur
+// Définir le schéma de l'utilisateur
 const userSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    }
+  username: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true }
 });
 
-// Méthode pour hasher le mot de passe avant de sauvegarder l'utilisateur
+// Avant d'enregistrer, hacher le mot de passe
 userSchema.pre('save', async function(next) {
-    if (!this.isModified('password')) return next();
-
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
+  if (this.isModified('password')) {
+    try {
+      const hashedPassword = await bcrypt.hash(this.password, 10);
+      this.password = hashedPassword; // Remplacer le mot de passe par sa version hachée
+      next();
+    } catch (err) {
+      next(err); // En cas d'erreur pendant le hachage
+    }
+  } else {
+    next(); // Si le mot de passe n'est pas modifié, on continue sans changer
+  }
 });
 
-// Méthode pour vérifier le mot de passe
-userSchema.methods.comparePassword = function(password) {
-    return bcrypt.compare(password, this.password);
+// Méthode pour comparer le mot de passe
+userSchema.methods.comparePassword = async function(password) {
+  return bcrypt.compare(password, this.password); // Comparer le mot de passe en texte clair avec le mot de passe haché
 };
 
-// Création du modèle
 const User = mongoose.model('User', userSchema);
 module.exports = User;
