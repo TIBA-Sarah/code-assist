@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Log.css";
 
@@ -9,14 +9,23 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Vérifier si l'utilisateur est déjà authentifié
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/Accueil"); // Si le token existe, rediriger vers la page d'accueil
+    }
+  }, [navigate]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+    setError(""); // Réinitialiser l'erreur à chaque tentative
 
     try {
       console.log("Connexion avec:", email, password);
 
+      // Envoyer la requête de connexion à l'API
       const response = await fetch("http://localhost:5000/api/login", {
         method: "POST",
         headers: {
@@ -28,7 +37,7 @@ const LoginPage = () => {
       const data = await response.json();
 
       if (response.ok) {
-        localStorage.setItem("token", data.token); // Stocker le token
+        localStorage.setItem("token", data.token); // Stocker le token dans localStorage
         navigate("/Accueil"); // Rediriger après connexion réussie
       } else {
         setError(data.message || "Échec de la connexion. Vérifiez vos informations.");
@@ -37,21 +46,24 @@ const LoginPage = () => {
       console.error("Erreur lors de la connexion :", err);
       setError("Erreur serveur. Réessayez plus tard.");
     } finally {
-      setLoading(false);
+      setLoading(false); // Revenir à l'état de non-chargement
     }
   };
 
   const handleContinueWithoutAccount = () => {
-    navigate("/Accueil");
+    navigate("/Accueil"); // Continuer sans compte et aller à la page d'accueil
   };
 
   return (
     <div className="login-page">
       <div className="debut">
         <h1>Bienvenue</h1>
-        <p>Pour commencer une recherche vous pouvez vous enregistrer ou le faire sans</p>
+        <p>Pour commencer une recherche, vous pouvez vous enregistrer ou continuer sans compte.</p>
       </div>
-      {error && <p className="error-message">{error}</p>} {/* Affichage de l'erreur si nécessaire */}
+
+      {/* Affichage de l'erreur si elle existe */}
+      {error && <p className="error-message">{error}</p>} 
+
       <form onSubmit={handleLogin} className="login-form">
         <div className="input-box">
           <input
@@ -77,6 +89,7 @@ const LoginPage = () => {
           {loading ? "Connexion..." : "Se connecter"}
         </button>
       </form>
+
       <button onClick={handleContinueWithoutAccount} className="secondary-button">
         Continuer sans compte
       </button>

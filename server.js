@@ -16,6 +16,7 @@ const PORT = 5000;
 app.post('/api/register', async (req, res) => {
   try {
       const { username, email, password } = req.body;
+      console.log(username, email, password );
       const user = new User({ username, email, password });
       await user.save();
       res.status(201).json({ message: "Utilisateur créé avec succès !" });
@@ -56,12 +57,35 @@ app.post('/api/generate-code', async (req, res) => {
     }
 });
 
+async function insertDefaultUser() {
+    try {
+        const existingUser = await User.findOne({ email:"admin@exemple.com" });
+        if (!existingUser) {
+            const hashedPassword = await bcrypt.hash('securepassword123', 10);
+            const user = new User({
+                username: 'admin',
+                email: 'admin@example.com',
+                password: hashedPassword
+            });
+            await user.save();
+            console.log('✅ Utilisateur par défaut ajouté avec succès.');
+        } else {
+            console.log('ℹ️ Utilisateur par défaut déjà existant.');
+        }
+    } catch (error) {
+        console.error('❌ Erreur lors de l insertion de l utilisateur par défaut :', error);
+    }
+}
+
 // Connexion à MongoDB
 mongoose.connect('mongodb://localhost:27017/codegenerator', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
-    .then(() => console.log('✅ MongoDB connecté avec succès'))
+    .then(async () => {
+        console.log('✅ MongoDB connecté avec succès');
+        await insertDefaultUser();
+    })
     .catch(err => console.error('❌ Échec de la connexion à MongoDB', err));
 
 // Route de test pour vérifier que le serveur fonctionne

@@ -15,6 +15,7 @@ export async function generateCode(prompt) {
         return null;
     }
 }
+
 export async function loginUser(email, password) {
     try {
         const response = await fetch("http://localhost:5000/api/login", {
@@ -26,9 +27,9 @@ export async function loginUser(email, password) {
         });
 
         const data = await response.json();
-        
+
         if (response.ok) {
-            localStorage.setItem("token", data.token); // Stocker le token si connexion réussie
+            localStorage.setItem("token", data.token); // Stocker le token JWT
             return { success: true, message: "Connexion réussie !" };
         } else {
             return { success: false, message: data.message || "Échec de la connexion" };
@@ -39,3 +40,26 @@ export async function loginUser(email, password) {
     }
 }
 
+// Nouvelle fonction pour l'inscription de l'utilisateur (register)
+export async function registerUser(username, email, password) {
+    try {
+        const response = await fetch("http://localhost:5000/api/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, email, password }),  // Envoie du username, email, et password
+        });
+
+        const data = await response.json();
+        
+        if (response.ok) {
+            return { success: true, message: "Utilisateur créé avec succès !" };
+        } else {
+            return { success: false, message: data.message || "Échec de la création de l'utilisateur" };
+        }
+    } catch (error) {
+        console.error("Erreur lors de l'inscription :", error);
+        return { success: false, message: "Erreur serveur" };
+    }
+}
